@@ -1,13 +1,22 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 const Footer = () => {
-  return <h4>footer</h4>
-}
+  return (
+    <Wrapper>
+      <h5>
+        &copy;{new Date().getFullYear()}
+        <span>ComfySloth</span>
+      </h5>
+      <h5 className="disc">Created by Amantur</h5>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.footer`
   height: 5rem;
   display: flex;
   flex-direction: column;
+  gap: 10px;
   justify-content: center;
   align-items: center;
   background: var(--clr-black);
@@ -24,8 +33,12 @@ const Wrapper = styled.footer`
     line-height: 1.25;
   }
   @media (min-width: 776px) {
-    flex-direction: row;
+    flex-direction: column;
   }
-`
 
-export default Footer
+  .disc {
+    display: block;
+  }
+`;
+
+export default Footer;
