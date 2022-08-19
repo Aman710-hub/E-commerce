@@ -23,7 +23,9 @@ const AboutPage = () => {
             animi sequi dicta eos veniam libero, suscipit aliquam inventore
             maiores? voluptate aspernatur quam, ducimus impedit ad! Placeat
             adipisci animi sequi dicta eos veniam libero, suscipit aliquam
-            inventore maiores?
+            inventore maiores? maiores? voluptate aspernatur quam, ducimus
+            impedit ad! Placeat adipisci animi sequi dicta eos veniam libero,
+            suscipit aliquam inventore maiores?
           </p>
         </article>
       </Wrapper>
