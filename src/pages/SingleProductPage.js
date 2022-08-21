@@ -86,7 +86,7 @@ const SingleProductPage = () => {
               <span>Brand :</span> {company}
             </p>
             <hr />
-            {stock > 0 && <AddToCart />}
+            {stock > 0 && <AddToCart single_product={single_product} />}
           </section>
         </div>
       </div>
