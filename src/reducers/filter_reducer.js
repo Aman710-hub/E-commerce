@@ -7,11 +7,20 @@ import {
   UPDATE_FILTERS,
   FILTER_PRODUCTS,
   CLEAR_FILTERS,
-} from '../actions'
+} from "../actions";
 
 const filter_reducer = (state, action) => {
-  return state
-  throw new Error(`No Matching "${action.type}" - action type`)
-}
+  switch (action.type) {
+    case LOAD_PRODUCTS:
+      // importent to spread!!! bs "all_products" and "filtered_products" are pointing to the same place. And so we need to copy that data so we do it with spread operator
+      return {
+        ...state,
+        all_products: [...action.payload],
+        filtered_products: [...action.payload],
+      };
+  }
 
-export default filter_reducer
+  throw new Error(`No Matching "${action.type}" - action type`);
+};
+
+export default filter_reducer;
