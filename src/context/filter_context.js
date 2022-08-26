@@ -17,6 +17,7 @@ const initialState = {
   // default products
   all_products: [],
   grid_view: true,
+  sort: "lowest-price",
 };
 
 const FilterContext = React.createContext();
@@ -33,13 +34,27 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: SET_LISTVIEW });
   };
 
+  // SORT
+  const updateSort = (e) => {
+    // this is how we get an atribute content
+    // const name = e.tartget.name;
+    const value = e.target.value;
+    dispatch({ type: UPDATE_SORT, payload: value });
+  };
+
+  useEffect(() => {
+    dispatch({ type: SORT_PRODUCTS });
+  }, [products, state.sort]);
+
   // TO GET DATA
   useEffect(() => {
     dispatch({ type: LOAD_PRODUCTS, payload: products });
     // when products loads
   }, [products]);
   return (
-    <FilterContext.Provider value={{ ...state, setGridView, setListView }}>
+    <FilterContext.Provider
+      value={{ ...state, setGridView, setListView, updateSort }}
+    >
       {children}
     </FilterContext.Provider>
   );

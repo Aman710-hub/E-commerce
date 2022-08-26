@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Product from "./Product";
 
 const GridView = ({ filtered_products }) => {
-  console.log("🚀 ~ GridView ~ filtered_products", filtered_products);
   return (
     <Wrapper>
       <div className="products-container">
