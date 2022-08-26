@@ -23,15 +23,23 @@ const FilterContext = React.createContext();
 
 export const FilterProvider = ({ children }) => {
   const { products } = useProductsContext();
-  console.log("🚀 ~ FilterProvider ~ products", products);
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // VIEW FUNCTIONS
+  const setGridView = () => {
+    dispatch({ type: SET_GRIDVIEW });
+  };
+  const setListView = () => {
+    dispatch({ type: SET_LISTVIEW });
+  };
+
+  // TO GET DATA
   useEffect(() => {
     dispatch({ type: LOAD_PRODUCTS, payload: products });
     // when products loads
   }, [products]);
   return (
-    <FilterContext.Provider value={{ ...state }}>
+    <FilterContext.Provider value={{ ...state, setGridView, setListView }}>
       {children}
     </FilterContext.Provider>
   );
