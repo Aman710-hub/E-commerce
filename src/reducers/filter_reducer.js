@@ -15,7 +15,6 @@ const filter_reducer = (state, action) => {
       console.table(action.payload);
       let maxPrice = action.payload.map((product) => product.price);
       maxPrice = Math.max(...maxPrice);
-      console.log(state);
       // importent to spread!!! bs "all_products" and "filtered_products" are pointing to the same place. And so we need to copy that data so we do it with spread operator
       return {
         ...state,
@@ -52,8 +51,21 @@ const filter_reducer = (state, action) => {
           return current.name.localeCompare(next.name);
         });
       }
-
       return { ...state, filtered_products: tempProducts };
+
+    case UPDATE_FILTERS:
+      const { name, value } = action.payload;
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          [name]: value,
+          // [action.payload.name]: action.payload.value,
+        },
+      };
+
+    case FILTER_PRODUCTS:
+      return { ...state };
   }
 
   throw new Error(`No Matching "${action.type}" - action type`);
