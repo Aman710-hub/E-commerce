@@ -63,6 +63,25 @@ const Filters = () => {
             </div>
           </div>
           {/*end of category */}
+          {/* company */}
+          <div className="form-control">
+            <h5>company</h5>
+            <select
+              className="company"
+              value={company} //  value attribute specifies the initial value of the element.
+              name="company"
+              onChange={updateFilters}
+            >
+              {categories.map((c, index) => {
+                return (
+                  <option value={c} key={index}>
+                    {c}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          {/* end of company */}
         </form>
       </div>
     </Wrapper>
