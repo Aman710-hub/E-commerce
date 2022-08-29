@@ -20,9 +20,10 @@ const Filters = () => {
     clearFilters,
     all_products,
   } = useFilterContext();
+  console.log("🚀 ~ Filters ~ min_price", min_price);
 
   const categories = getUniqueValues(all_products, "category");
-  const companies = getUniqueValues(all_products, "companies");
+  const companies = getUniqueValues(all_products, "company");
   const colors = getUniqueValues(all_products, "colors");
 
   return (
@@ -82,6 +83,43 @@ const Filters = () => {
             </select>
           </div>
           {/* end of company */}
+          {/* color */}
+          <div className="form-control">
+            <h5>color</h5>
+            <div className="colors">
+              {colors.map((c, index) => {
+                return (
+                  <button
+                    style={{ background: c }}
+                    key={index}
+                    name="color"
+                    className={`${
+                      color === c ? "active color-btn" : "color-btn"
+                    }`}
+                    data-color={c}
+                    onClick={updateFilters}
+                  >
+                    {color === c ? <FaCheck /> : null}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          {/* end of color */}
+          {/* range */}
+          <div className="form-control">
+            <h5>price</h5>
+            <p className="price">{formatPrice(price)}</p>
+            <input
+              type="range"
+              min={min_price}
+              value={price}
+              name="price"
+              max={max_price}
+              onChange={updateFilters}
+            />
+          </div>
+          {/* end of range */}
         </form>
       </div>
     </Wrapper>
