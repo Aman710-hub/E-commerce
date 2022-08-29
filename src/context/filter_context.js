@@ -26,7 +26,7 @@ const initialState = {
     min_price: 0,
     max_price: 0,
     price: 0,
-    shipping: true,
+    shipping: false,
   },
 };
 
@@ -55,7 +55,9 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };
 
-  const clearFilters = () => {};
+  const clearFilters = () => {
+    dispatch({ type: CLEAR_FILTERS, payload: state.all_products });
+  };
   // VIEW FUNCTIONS
   const setGridView = () => {
     dispatch({ type: SET_GRIDVIEW });
