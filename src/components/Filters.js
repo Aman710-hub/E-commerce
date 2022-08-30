@@ -72,7 +72,7 @@ const Filters = () => {
               name="company"
               onChange={updateFilters}
             >
-              {categories.map((c, index) => {
+              {companies.map((c, index) => {
                 return (
                   <option value={c} key={index}>
                     {c}
