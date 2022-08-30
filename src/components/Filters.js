@@ -20,7 +20,6 @@ const Filters = () => {
     clearFilters,
     all_products,
   } = useFilterContext();
-  console.log("🚀 ~ Filters ~ min_price", min_price);
 
   const categories = getUniqueValues(all_products, "category");
   const companies = getUniqueValues(all_products, "company");

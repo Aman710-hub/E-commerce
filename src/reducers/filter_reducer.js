@@ -12,7 +12,6 @@ import {
 const filter_reducer = (state, action) => {
   switch (action.type) {
     case LOAD_PRODUCTS:
-      console.table(action.payload);
       let maxPrice = action.payload.map((product) => product.price);
       maxPrice = Math.max(...maxPrice);
       // importent to spread!!! bs "all_products" and "filtered_products" are pointing to the same place. And so we need to copy that data so we do it with spread operator
@@ -73,6 +72,12 @@ const filter_reducer = (state, action) => {
       if (text) {
         tempProducts1 = tempProducts1.filter((product) => {
           return product.name.toLowerCase().startsWith(text);
+        });
+      }
+      // category
+      if (category !== "all") {
+        tempProducts1 = tempProducts1.filter((product) => {
+          return product.category === category;
         });
       }
       return { ...state, filtered_products: tempProducts1 };
