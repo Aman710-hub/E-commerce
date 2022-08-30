@@ -22,7 +22,7 @@ const initialState = {
     text: "",
     company: "all",
     category: "all",
-    color: "all",
+    colors: "all",
     min_price: 0,
     max_price: 0,
     price: 0,
@@ -43,7 +43,7 @@ export const FilterProvider = ({ children }) => {
     if (name === "category") {
       value = e.target.textContent;
     }
-    if (name === "color") {
+    if (name === "colors") {
       value = e.target.dataset.color;
     }
     if (name === "price") {

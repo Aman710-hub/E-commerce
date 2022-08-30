@@ -9,7 +9,7 @@ export const formatPrice = (number) => {
 
 export const getUniqueValues = (data, type) => {
   let uniqueValues = data.map((item) => item[type]);
-  if (type === "color ") {
+  if (type === "colors") {
     // Метод flat() возвращает новый массив, в котором все элементы вложенных подмассивов были рекурсивно "подняты" на указанный уровень depth.
     uniqueValues = uniqueValues.flat();
   }

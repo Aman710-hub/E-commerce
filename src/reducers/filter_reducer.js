@@ -66,7 +66,8 @@ const filter_reducer = (state, action) => {
     case FILTER_PRODUCTS:
       const { all_products } = state;
       let tempProducts1 = [...all_products];
-      const { text, company, category, shipping, color, price } = state.filters;
+      const { text, company, category, shipping, colors, price } =
+        state.filters;
       // FILTERING
       // search filter
       if (text) {
@@ -87,10 +88,10 @@ const filter_reducer = (state, action) => {
         });
       }
       // color
-      if (color !== "all") {
+      if (colors !== "all") {
         tempProducts1 = tempProducts1.filter((product) => {
           // The find() method returns the value of the first element that passes a test.
-          return product.color.find((c) => c === color);
+          return product.colors.find((c) => c === colors);
         });
       }
       // price
@@ -115,7 +116,7 @@ const filter_reducer = (state, action) => {
           category: "all",
           color: "all",
           price: state.filters.max_price,
-          shipping: true,
+          shipping: false,
         },
       };
   }

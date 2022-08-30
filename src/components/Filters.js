@@ -10,7 +10,7 @@ const Filters = () => {
       text,
       category,
       company,
-      color,
+      colors,
       min_price,
       max_price,
       price,
@@ -23,7 +23,7 @@ const Filters = () => {
 
   const categories = getUniqueValues(all_products, "category");
   const companies = getUniqueValues(all_products, "company");
-  const colors = getUniqueValues(all_products, "colors");
+  const colors1 = getUniqueValues(all_products, "colors");
 
   return (
     <Wrapper>
@@ -84,21 +84,21 @@ const Filters = () => {
           {/* end of company */}
           {/* color */}
           <div className="form-control">
-            <h5>color</h5>
+            <h5>colors</h5>
             <div className="colors">
-              {colors.map((c, index) => {
+              {colors1.map((c, index) => {
                 return (
                   <button
-                    style={{ background: c }}
-                    key={index}
-                    name="color"
-                    className={`${
-                      color === c ? "active color-btn" : "color-btn"
-                    }`}
-                    data-color={c}
                     onClick={updateFilters}
+                    name="colors"
+                    key={index}
+                    style={{ background: c }}
+                    data-color={c}
+                    className={`${
+                      colors === c ? "color-btn active" : "color-btn"
+                    }`}
                   >
-                    {color === c ? <FaCheck /> : null}
+                    {colors === c && <FaCheck />}
                   </button>
                 );
               })}
