@@ -86,6 +86,19 @@ const filter_reducer = (state, action) => {
           return product.company === company;
         });
       }
+      // color
+      if (color !== "all") {
+        tempProducts1 = tempProducts1.filter((product) => {
+          // The find() method returns the value of the first element that passes a test.
+          return product.color.find((c) => c === color);
+        });
+      }
+      // price
+      if (price > 0) {
+        tempProducts1 = tempProducts1.filter((product) => {
+          return product.price <= price;
+        });
+      }
       return { ...state, filtered_products: tempProducts1 };
     case CLEAR_FILTERS:
       return {
