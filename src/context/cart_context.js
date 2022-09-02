@@ -8,8 +8,18 @@ import {
   COUNT_CART_TOTALS,
 } from "../actions";
 
+// GET LOCALSTORAGE
+const getLocalStorage = () => {
+  const cart = localStorage.getItem("cart");
+  if (cart) {
+    return JSON.parse(localStorage.getItem("cart"));
+  } else {
+    return [];
+  }
+};
+
 const initialState = {
-  cart: [],
+  cart: getLocalStorage(),
   total_items: 0,
   total_amoutn: 0,
   shipping_fee: 488,
@@ -34,6 +44,13 @@ export const CartProvider = ({ children }) => {
   const toggleAmount = (id, value) => {};
   // clear cart
   const clearCart = () => {};
+
+  // LOCAL STORAGE
+  useEffect(() => {
+    // The JSON.stringify() method converts JavaScript objects into strings.
+    // When sending data to a web server the data has to be a string.
+    localStorage.setItem("cart", JSON.stringify(state.cart));
+  });
   return (
     <CartContext.Provider
       value={{ ...state, addToCart, removeItem, toggleAmount, clearCart }}
