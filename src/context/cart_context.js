@@ -39,7 +39,12 @@ export const CartProvider = ({ children }) => {
   };
 
   // remove items
-  const removeItem = (id) => {};
+  const removeItem = (id) => {
+    const tempCart = state.cart.filter((item) => {
+      return item.id !== id;
+    });
+    dispatch({ type: REMOVE_CART_ITEM, payload: tempCart });
+  };
   // toggle amount
   const toggleAmount = (id, value) => {};
   // clear cart
