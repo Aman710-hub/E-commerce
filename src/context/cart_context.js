@@ -21,7 +21,7 @@ const getLocalStorage = () => {
 const initialState = {
   cart: getLocalStorage(),
   total_items: 0,
-  total_amoutn: 0,
+  total_amount: 0,
   shipping_fee: 488,
 };
 
