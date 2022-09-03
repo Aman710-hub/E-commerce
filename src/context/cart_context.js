@@ -48,7 +48,9 @@ export const CartProvider = ({ children }) => {
   // toggle amount
   const toggleAmount = (id, value) => {};
   // clear cart
-  const clearCart = () => {};
+  const clearCart = () => {
+    dispatch({ type: CLEAR_CART });
+  };
 
   // LOCAL STORAGE
   useEffect(() => {
