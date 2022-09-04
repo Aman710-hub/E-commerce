@@ -46,8 +46,56 @@ const cart_reducer = (state, action) => {
       return { ...state, cart: action.payload };
     case CLEAR_CART:
       return { ...state, cart: [] };
+    case TOGGLE_CART_ITEM_AMOUNT:
+      const { id1, value } = action.payload;
+      const tempItem1 = state.cart.map((item) => {
+        if (item.id === id1) {
+          if (value === "inc") {
+            let newAmount1 = item.amount + 1;
+            if (newAmount1 > item.max) {
+              newAmount1 = item.max;
+            }
+            return { ...item, amount: newAmount1 };
+          }
+          if (value === "dec") {
+            let newAmount1 = item.amount - 1;
+            if (newAmount1 < 1) {
+              newAmount1 = 1;
+            }
+            return { ...item, amount: newAmount1 };
+          }
+        } else {
+          return item;
+        }
+      });
+
+      return { ...state, cart: tempItem1 };
   }
   throw new Error(`No Matching "${action.type}" - action type`);
 };
 
 export default cart_reducer;
+
+// const { id1, value } = action.payload;
+// const tempItem1 = state.cart.map((item) => {
+//   if (item.id === id1) {
+//     if (value === "inc") {
+//       let newAmount = item.amount + 1;
+//       console.log("🚀 ~ tempItem1 ~ newAmount", newAmount);
+//       if (newAmount > item.max) {
+//         newAmount = item.max;
+//       }
+//       return { ...state, amount: newAmount };
+//     }
+//     if (value === "dec") {
+//       let newAmount = item.amount - 1;
+//       if (newAmount < 1) {
+//         newAmount = 1;
+//       }
+//       return { ...state, amount: newAmount };
+//     }
+//   } else {
+//     return item;
+//   }
+//   return { ...state, cart: tempItem1 };
+// });
