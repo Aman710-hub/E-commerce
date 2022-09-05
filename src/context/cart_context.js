@@ -56,10 +56,11 @@ export const CartProvider = ({ children }) => {
 
   // LOCAL STORAGE
   useEffect(() => {
+    dispatch({ type: COUNT_CART_TOTALS });
     // The JSON.stringify() method converts JavaScript objects into strings.
     // When sending data to a web server the data has to be a string.
     localStorage.setItem("cart", JSON.stringify(state.cart));
-  });
+  }, [state.cart]);
   return (
     <CartContext.Provider
       value={{ ...state, addToCart, removeItem, toggleAmount, clearCart }}

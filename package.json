@@ -11,7 +11,7 @@
     "@testing-library/user-event": "^12.2.2",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
-    "react": "^16.13.1",
+    "react": "^18.2.0",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
     "react-icons": "^3.11.0",
