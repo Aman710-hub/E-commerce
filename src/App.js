@@ -25,7 +25,14 @@ function App() {
         <Route path="/products" element={<ProductsPage />} />
         {/* for useRem */}
         <Route path="/products/:id" element={<SingleProductPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoute>
+              <CheckoutPage />
+            </PrivateRoute>
+          }
+        />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />
