@@ -1,29 +1,112 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
-import { loadStripe } from '@stripe/stripe-js'
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { loadStripe } from "@stripe/stripe-js";
 import {
   CardElement,
   useStripe,
   Elements,
   useElements,
-} from '@stripe/react-stripe-js'
-import axios from 'axios'
-import { useCartContext } from '../context/cart_context'
-import { useUserContext } from '../context/user_context'
-import { formatPrice } from '../utils/helpers'
-import { useHistory } from 'react-router-dom'
+} from "@stripe/react-stripe-js";
+import axios from "axios";
+import { useCartContext } from "../context/cart_context";
+import { useUserContext } from "../context/user_context";
+import { formatPrice } from "../utils/helpers";
+import { useNavigate } from "react-router-dom";
+
+const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const CheckoutForm = () => {
-  return <h4>hello from Stripe Checkout </h4>
-}
+  const { cart, total_amount, shipping_fee, clearCart } = useCartContext();
+  const { myUser } = useUserContext();
+  const navigate = useNavigate();
+
+  // STRIPE
+  const [succeeded, setSecceeded] = useState(false);
+  const [error, setError] = useState(null);
+  const [proccessing, setProccessing] = useState("");
+  const [disabled, setDisabled] = useState(true);
+  const [clientSecret, setClientSecret] = useState("");
+  const stripe = useStripe();
+  const elements = useElements();
+  const cardStyle = {
+    style: {
+      base: {
+        color: "#32325d",
+        fontFamily: "Aprial, sans-serif",
+        fontSmoothing: "antialiased",
+        fontSize: "16px",
+        placeholder: {
+          color: "#32325d",
+        },
+      },
+      invalid: {
+        color: "#fa755a",
+        inconColor: "#fa755a",
+      },
+    },
+  };
+
+  // //
+  // const createPaymentIntent = async () => {
+  //   try {
+  //     const data = await axios.post(
+  //       "/.netlify/functions/create-payment",
+  //       JSON.stringify({ cart, shipping_fee, total_amount })
+  //     );
+  //     console.log("🚀 ~ createPaymentIntent ~ data", data);
+  //   } catch (error) {
+  //     console.log(error.responce);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   createPaymentIntent();
+  // }, []);
+
+  const handleChange = async (event) => {};
+  const handleSubmit = async (ev) => {};
+
+  return (
+    <div>
+      <form id="payment-form" onSubmit={handleSubmit}>
+        <CardElement
+          id="card-element"
+          onChange={handleChange}
+          options={cardStyle}
+        />
+        <button disabled={proccessing || disabled || succeeded} id="submit">
+          <span id="submit">
+            {proccessing ? <div className="spinner" id="spinner"></div> : "Pay"}
+          </span>{" "}
+        </button>
+        {/* Show any error that happens when proccessing the paynent */}
+        {error && (
+          <div className="card-error" role="role">
+            {error}{" "}
+          </div>
+        )}
+        {/* show success msg wathch this */}
+        <p className={succeeded ? "result=message" : "result-message hide"}>
+          Payment succedded, see the result in your <br />
+          <a href="`https://dashboard.sticpe.com/test/payment">
+            Stripe dashbord.
+          </a>
+          Refresh the page to pay agian.
+        </p>
+      </form>
+    </div>
+  );
+};
 
 const StripeCheckout = () => {
   return (
     <Wrapper>
-      <CheckoutForm />
+      <Elements stripe={promise}>
+        <CheckoutForm />
+      </Elements>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.section`
   form {
@@ -122,7 +205,7 @@ const Wrapper = styled.section`
   .spinner:before,
   .spinner:after {
     position: absolute;
-    content: '';
+    content: "";
   }
   .spinner:before {
     width: 10.4px;
@@ -163,6 +246,6 @@ const Wrapper = styled.section`
       width: 80vw;
     }
   }
-`
+`;
 
-export default StripeCheckout
+export default StripeCheckout;
