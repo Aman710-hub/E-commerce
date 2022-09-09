@@ -47,21 +47,20 @@ const CheckoutForm = () => {
   };
 
   // //
-  // const createPaymentIntent = async () => {
-  //   try {
-  //     const data = await axios.post(
-  //       "/.netlify/functions/create-payment",
-  //       JSON.stringify({ cart, shipping_fee, total_amount })
-  //     );
-  //     console.log("🚀 ~ createPaymentIntent ~ data", data);
-  //   } catch (error) {
-  //     console.log(error.responce);
-  //   }
-  // };
+  const createPaymentIntent = async () => {
+    try {
+      const data = await axios.post(
+        "/.netlify/functions/create-payment",
+        JSON.stringify({ cart, shipping_fee, total_amount })
+      );
+    } catch (error) {
+      console.log(error.responce);
+    }
+  };
 
-  // useEffect(() => {
-  //   createPaymentIntent();
-  // }, []);
+  useEffect(() => {
+    createPaymentIntent();
+  }, []);
 
   const handleChange = async (event) => {};
   const handleSubmit = async (ev) => {};
